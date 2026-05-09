@@ -30,4 +30,13 @@ class Angle:
 
     def get_tolerance(self):
         return convert_rads_to(self.tolerance, self.tolerance_type)
+#NEW
+    def solve_IGP(self, point_1 = Iterable, point_2 = Iterable):
+        self.angle = IGP_alpha(point_1, point_2)
 
+    def find_angle(self, point_1 = Iterable, point_2 = Iterable, point_3 = Iterable):
+        self.angle = find_angle_to_point(point_1, point_2, point_3)
+
+    def broadcast_to_next(self, directional_angle):
+        new = directional_angle - self.angle + np.pi
+        self.angle = new
