@@ -1,6 +1,5 @@
 # Geothon
 Geothon (GEOdesy + pyTHON) is a python library offering differrent utilities for performing geodesical calculations
-Geothon  - библиотека для Python для работы с геопространственными данными и математической обработки геодезических измерений.
 ## Libraries used
 -- Numpy
 ## Available tools
