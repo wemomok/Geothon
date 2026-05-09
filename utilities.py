@@ -52,7 +52,7 @@ def convert_rads_to(input_angle=float, angle_type=GeothonConstants):
         d = int(deg)
         m = int((deg - d) * 60)
         s = (deg - d - m / 60) * 3600
-        return d, m, s
+        return d, m, round(s, 10)
 
     raise AttributeError('Invalid angle type provided')
 
@@ -61,3 +61,27 @@ def convert(input_angle, input_type=GeothonConstants, output_type=GeothonConstan
     rads = convert_to_rads(input_angle, input_type)
     return convert_rads_to(rads, output_type)
 
+#NEW
+def Heaviside_step_function(x = float or int):
+    if x >= 0:
+        return 1
+    else:
+        return 0
+
+
+def sgn_0(x = float or int):
+    return 2 * Heaviside_step_function(x) - 1
+
+
+def IGP_alpha(point_1 = Iterable, point_2 = Iterable):
+    delta_x = point_2[0] - point_1[0]
+    delta_y = point_2[1] - point_1[1]
+    distanse = np.sqrt(delta_x ** 2 + delta_y ** 2)
+    rumb = np.arccos(delta_x / distanse)
+    return (1 - sgn_0(delta_y) / 2 - sgn_0(delta_x) * sgn_0(delta_y) / 2) * np.pi + sgn_0(delta_x) * sgn_0(delta_y) * rumb
+
+
+def find_angle_to_point(point_1 = Iterable, point_2 = Iterable, point_3 = Iterable):
+    alpha_2_1 = IGP_alpha(point_2, point_1)
+    alpha_2_3 = IGP_alpha(point_2, point_3)
+    return alpha_2_1 - alpha_2_3
