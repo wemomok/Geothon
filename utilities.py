@@ -9,6 +9,8 @@ class GeothonConstants(Enum):
      DEG = 'deg'
      DMS = 'dms'
      SEC = 'sec'
+     XY = 'xy'
+     XYZ = 'xyz'
 
 
 def convert_to_rads(input_angle=float or int or Iterable, angle_type=GeothonConstants):

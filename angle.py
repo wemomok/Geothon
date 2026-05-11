@@ -12,7 +12,7 @@ class Angle:
     tolerance_type: GeothonConstants
 
     def __init__(self, input_angle=float or int or Iterable, angle_type=GeothonConstants.RAD, tolerance=(0,), tolerance_type=GeothonConstants.DMS):
-        self.type = angle_type
+        self.angle_type = angle_type
         self.tolerance_type = tolerance_type
 
         self.__angle = convert_to_rads(input_angle, angle_type)
@@ -20,7 +20,7 @@ class Angle:
 
     def set(self, input_angle=float or int or Iterable, angle_type=None, tolerance=(0,), tolerance_type=None):
         if not angle_type:
-            angle_type = self.type
+            angle_type = self.angle_type
         if not tolerance_type:
             tolerance_type = self.tolerance_type
 
@@ -28,7 +28,7 @@ class Angle:
         self.__tolerance = convert_to_rads(tolerance, tolerance_type)
 
     def get_angle(self):
-        return convert_rads_to(self.__angle, self.type)
+        return convert_rads_to(self.__angle, self.angle_type)
 
     def get_tolerance(self):
         return convert_rads_to(self.__tolerance, self.tolerance_type)
@@ -42,3 +42,4 @@ class Angle:
     def broadcast_to_next(self, directional_angle):
         new = directional_angle - self.angle + np.pi
         self.__angle = new
+
