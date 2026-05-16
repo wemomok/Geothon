@@ -1,0 +1,29 @@
+import numpy as np
+
+from collections.abc import Iterable
+
+from angle import Angle
+from point import Point
+from vector import Vector
+from utilities import IGP_alpha
+
+class InverseLinearAngularCrossbearing:
+    points: Iterable[Point]
+    angles: Iterable[Angle]
+    distances: Iterable[float]
+
+    @staticmethod
+    def calculate_triangle(a=Point, b=Point, s1=float, s2=float, beta=Angle):
+        alphaba = IGP_alpha(b, a)
+        phi = np.arcsin
+
+    def __init__(self, points=Iterable[Point], angles=Iterable[Angle], distances=Iterable[float]):
+        points = [*points]
+        angles = [*angles]
+        distances = [*distances]
+
+        if not (len(points) == len(distances) and len(angles) == len(points) - 1):
+            raise BaseException('Incorrect data configuration: amount of points, angles and distances doesn\'t match')
+
+        
+

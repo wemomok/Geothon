@@ -1,7 +1,6 @@
 import numpy as np
 
-from utilities import *
-
+from constants import GeothonConstants
 
 class Point:
     coords: np.array
