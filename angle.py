@@ -33,13 +33,24 @@ class Angle:
     def get_tolerance(self):
         return convert_rads_to(self.__tolerance, self.tolerance_type)
 
-    def solve_IGP(self, point_1=Iterable, point_2=Iterable):
-        self.__angle = IGP_alpha(point_1, point_2)
+    def __iadd__(self, other):
+        if not isinstance(other, Angle):
+            raise BaseException(f"No overload for adding Angle and {type(other)}")
+        self.__angle += other.__angle
+        return self
 
-    def find_angle(self, point_1=Iterable, point_2=Iterable, point_3=Iterable):
-        self.__angle = find_angle_to_point(point_1, point_2, point_3)
+    def __isub__(self, other):
+        if not isinstance(other, Angle):
+            raise BaseException(f"No overload for subtracting Angle and {type(other)}")
+        self.__angle -= other.__angle
+        return self
 
-    def broadcast_to_next(self, directional_angle):
-        new = directional_angle - self.angle + np.pi
-        self.__angle = new
+    def __add__(self, other):
+        if not isinstance(other, Angle):
+            raise BaseException(f"No overload for adding Angle and {type(other)}")
+        return Angle(self.__angle + other.__angle)
 
+    def __sub__(self, other):
+        if not isinstance(other, Angle):
+            raise BaseException(f"No overload for subtracting Angle and {type(other)}")
+        return Angle(self.__angle - other.__angle)
