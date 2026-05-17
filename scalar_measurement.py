@@ -67,3 +67,7 @@ class ScalarMeasurement:
             self *= initial
 
         return self
+
+    def __str__(self):
+        return f'{self.value} +- {self.tolerance}'
+
