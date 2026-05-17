@@ -26,12 +26,13 @@ def convert_to_rads(input_angle=float or int or Iterable, angle_type=GeothonCons
             dms.append(0)
 
         deg, mins, sec = dms
-        angle = np.deg2rad(deg + mins / 60 + sec / 3600)
+        angle = np.deg2rad((deg + mins / 60 + sec / 3600) *
+                           (-1 if any(val < 0 for val in dms) else 1))
 
     else:
         raise AttributeError('Invalid angle type provided')
 
-    return angle
+    return angle % (2 * np.pi)
 
 
 def convert_rads_to(input_angle=float, angle_type=GeothonConstants):
@@ -111,4 +112,3 @@ class Angle:
             raise BaseException(
                 f"No overload for subtracting Angle and {type(other)}")
         return Angle(self.__angle - other.__angle)
-

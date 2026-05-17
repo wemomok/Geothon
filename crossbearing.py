@@ -5,7 +5,6 @@ from collections.abc import Iterable
 from angle import Angle
 from point import Point
 from utilities import IGP
-from constants import GeothonConstants
 
 
 def inverseLinearAngularCrossbearing(points=Iterable[Point], angles=Iterable[Angle],
@@ -37,4 +36,3 @@ def inverseLinearAngularCrossbearing(points=Iterable[Point], angles=Iterable[Ang
     sumy = sum(point[1] for point in result_points)
 
     return Point(sumx/len(result_points), sumy/len(result_points))
-
