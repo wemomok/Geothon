@@ -68,6 +68,38 @@ class ScalarMeasurement:
 
         return self
 
-    def __str__(self):
-        return f'{self.value} +- {self.tolerance}'
+    def __eq__(self, other):
+        if isinstance(other, ScalarMeasurement):
+            return self.value == other.value
+        return self.value == other
 
+    def __ne__(self, other):
+        if isinstance(other, ScalarMeasurement):
+            return self.value != other.value
+        return self.value != other
+
+    def __lt__(self, other):
+        if isinstance(other, ScalarMeasurement):
+            return self.value < other.value
+        return self.value < other
+
+    def __le__(self, other):
+        if isinstance(other, ScalarMeasurement):
+            return self.value <= other.value
+        return self.value <= other
+
+    def __gt__(self, other):
+        if isinstance(other, ScalarMeasurement):
+            return self.value > other.value
+        return self.value > other
+
+    def __ge__(self, other):
+        if isinstance(other, ScalarMeasurement):
+            return self.value >= other.value
+        return self.value >= other
+
+    def __str__(self):
+        return f'{self.value}±{self.tolerance}'
+
+    def __repr__(self):
+        return f'ScalarMeasurement {self.value}±{self.tolerance}'

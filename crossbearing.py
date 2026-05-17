@@ -38,15 +38,3 @@ def inverseLinearAngularCrossbearing(points=Iterable[Point], angles=Iterable[Ang
 
     return Point(sumx/len(result_points), sumy/len(result_points))
 
-
-a = Point(100, 120)
-b = Point(83.949, 88.791)
-c = Point(65.362, 100.884)
-points = [a, b, c]
-a1 = Angle((26, 56, 56), GeothonConstants.DMS)
-a2 = Angle((31, 23, 33), GeothonConstants.DMS)
-angles = [a1, a2]
-s = [18.572, 42.570, 36.398]
-
-p = inverseLinearAngularCrossbearing(points, angles, s)
-print(p.coords)
