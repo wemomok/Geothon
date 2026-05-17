@@ -6,6 +6,8 @@ from angle import Angle
 from point import Point
 from vector import Vector
 from utilities import IGP_alpha
+from constants import GeothonConstants
+
 
 class InverseLinearAngularCrossbearing:
     points: Iterable[Point]
@@ -14,8 +16,10 @@ class InverseLinearAngularCrossbearing:
 
     @staticmethod
     def calculate_triangle(a=Point, b=Point, s1=float, s2=float, beta=Angle):
-        alphaba = IGP_alpha(b, a)
-        phi = np.arcsin
+        alphaba, sab = IGP_alpha(b, a)
+        phi = np.arccos((s1 ** 2 + sab ** 2 - s2 ** 2) / (2 * sab * s1))
+        alphaap = alphaba - phi + np.pi
+        return Point(a[0] + s1 * np.cos(alphaap), a[1] + s1 * np.sin(alphaap))
 
     def __init__(self, points=Iterable[Point], angles=Iterable[Angle], distances=Iterable[float]):
         points = [*points]
