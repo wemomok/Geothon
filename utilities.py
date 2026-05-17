@@ -14,7 +14,7 @@ def sgn_0(x=float or int):
     return 2 * Heaviside_step_function(x) - 1
 
 
-def IGP_alpha(point_1=Point, point_2=Point):
+def IGP(point_1=Point, point_2=Point):
     delta_x = point_2[0] - point_1[0]
     delta_y = point_2[1] - point_1[1]
     distance = np.sqrt(delta_x ** 2 + delta_y ** 2)
