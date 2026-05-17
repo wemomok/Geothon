@@ -1,5 +1,7 @@
 import numpy as np
 
+from copy import copy
+
 
 class ScalarMeasurement:
     def __init__(self, value, tolerance=0):
@@ -19,21 +21,11 @@ class ScalarMeasurement:
         return ScalarMeasurement(self.value - other, self.tolerance)
 
     def __iadd__(self, other):
-        if isinstance(other, ScalarMeasurement):
-            self.value += other.value
-            self.tolerance = np.sqrt(
-                self.tolerance ** 2 + other.tolerance ** 2)
-        else:
-            self.value += other
+        self = self + other
         return self
 
     def __isub__(self, other):
-        if isinstance(other, ScalarMeasurement):
-            self.value -= other.value
-            self.tolerance = np.sqrt(
-                self.tolerance ** 2 + other.tolerance ** 2)
-        else:
-            self.value -= other
+        self = self - other
         return self
 
     def __mul__(self, other):
@@ -48,11 +40,19 @@ class ScalarMeasurement:
                 (self.tolerance / other.value) ** 2 + (other.tolerance / self.value) ** 2))
         return ScalarMeasurement(self.value / other, self.tolerance / other)
 
+    def __imul__(self, other):
+        self = self * other
+        return self
+
+    def __itruediv__(self, other):
+        self = self / other
+        return self
+
     def __pow__(self, n):
         if not isinstance(n, int):
             raise BaseException(f'Raising ScalarMeasurement to {
                                 type(n)} is not supported')
-        result = self
+        result = copy(self)
         for _ in range(n):
             result *= self
 
@@ -62,7 +62,7 @@ class ScalarMeasurement:
         if not isinstance(n, int):
             raise BaseException(f'Raising ScalarMeasurement to {
                                 type(n)} is not supported')
-        initial = self
+        initial = copy(self)
         for _ in range(n):
             self *= initial
 
@@ -102,4 +102,4 @@ class ScalarMeasurement:
         return f'{self.value}±{self.tolerance}'
 
     def __repr__(self):
-        return f'ScalarMeasurement {self.value}±{self.tolerance}'
+        return f'ScalarMeasurement: {self.value}±{self.tolerance}'
