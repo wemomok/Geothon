@@ -1,20 +1,23 @@
 import numpy as np
 
 from constants import GeothonConstants
+from scalar_measurement import ScalarMeasurement
+
 
 class Point:
     coords: np.array
 
     point_type: GeothonConstants
 
-    def __init__(self, x=float, y=float, z=None):
+    def __init__(self, x=ScalarMeasurement, y=ScalarMeasurement, z=None):
         self.point_type = GeothonConstants.XY if not z else GeothonConstants.XYZ
 
         self.coords = np.array([x, y]) if not z else np.array([x, y, z])
 
     def __iadd__(self, other):
         if not isinstance(other, Point):
-            raise BaseException(f'No overload for adding Point and {type(other)}')
+            raise BaseException(
+                f'No overload for adding Point and {type(other)}')
 
         if self.point_type == GeothonConstants.XY and other.point_type == GeothonConstants.XYZ:
             self.coords += other.coords[:2]
@@ -27,7 +30,8 @@ class Point:
 
     def __isub__(self, other):
         if not isinstance(other, Point):
-            raise BaseException(f'No overload for subtracting Point and {type(other)}')
+            raise BaseException(
+                f'No overload for subtracting Point and {type(other)}')
 
         if self.point_type == GeothonConstants.XY and other.point_type == GeothonConstants.XYZ:
             self.coords -= other.coords[:2]
@@ -40,7 +44,8 @@ class Point:
 
     def __add__(self, other):
         if not isinstance(other, Point):
-            raise BaseException(f'No overload for adding Point and {type(other)}')
+            raise BaseException(
+                f'No overload for adding Point and {type(other)}')
 
         if self.point_type == GeothonConstants.XY and other.point_type == GeothonConstants.XYZ:
             return Point(*(self.coords + other.coords[:2]))
@@ -51,7 +56,8 @@ class Point:
 
     def __sub__(self, other):
         if not isinstance(other, Point):
-            raise BaseException(f'No overload for adding Point and {type(other)}')
+            raise BaseException(
+                f'No overload for adding Point and {type(other)}')
 
         if self.point_type == GeothonConstants.XY and other.point_type == GeothonConstants.XYZ:
             return Point(*(self.coords - other.coords[:2]))

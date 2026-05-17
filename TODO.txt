@@ -3,4 +3,6 @@ TOTAL TESTING
 Easy:
   Negative angle issue
   __str__ overloads for Point, Vector, Angle
+  angle overflow over 2pi
+  convert angle to scalar
 

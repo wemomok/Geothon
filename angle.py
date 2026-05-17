@@ -4,10 +4,11 @@ from collections.abc import Iterable
 
 from constants import GeothonConstants
 
+
 def convert_to_rads(input_angle=float or int or Iterable, angle_type=GeothonConstants):
     if not isinstance(input_angle, Iterable) and angle_type == GeothonConstants.DMS or \
             isinstance(input_angle, Iterable) and angle_type != GeothonConstants.DMS:
-                raise AttributeError('Angle type provided doesn\'t match input angle')
+        raise AttributeError('Angle type provided doesn\'t match input angle')
 
     if angle_type == GeothonConstants.RAD:
         angle = input_angle
@@ -62,7 +63,8 @@ class Angle:
     angle_type: GeothonConstants
     tolerance_type: GeothonConstants
 
-    def __init__(self, input_angle=float or int or Iterable, angle_type=GeothonConstants.RAD, tolerance=(0,), tolerance_type=GeothonConstants.DMS):
+    def __init__(self, input_angle=float or int or Iterable,
+                 angle_type=GeothonConstants.RAD, tolerance=(0,), tolerance_type=GeothonConstants.DMS):
         self.angle_type = angle_type
         self.tolerance_type = tolerance_type
 
@@ -86,23 +88,27 @@ class Angle:
 
     def __iadd__(self, other):
         if not isinstance(other, Angle):
-            raise BaseException(f"No overload for adding Angle and {type(other)}")
+            raise BaseException(
+                f"No overload for adding Angle and {type(other)}")
         self.__angle += other.__angle
         return self
 
     def __isub__(self, other):
         if not isinstance(other, Angle):
-            raise BaseException(f"No overload for subtracting Angle and {type(other)}")
+            raise BaseException(
+                f"No overload for subtracting Angle and {type(other)}")
         self.__angle -= other.__angle
         return self
 
     def __add__(self, other):
         if not isinstance(other, Angle):
-            raise BaseException(f"No overload for adding Angle and {type(other)}")
+            raise BaseException(
+                f"No overload for adding Angle and {type(other)}")
         return Angle(self.__angle + other.__angle)
 
     def __sub__(self, other):
         if not isinstance(other, Angle):
-            raise BaseException(f"No overload for subtracting Angle and {type(other)}")
+            raise BaseException(
+                f"No overload for subtracting Angle and {type(other)}")
         return Angle(self.__angle - other.__angle)
 

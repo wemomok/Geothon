@@ -1,5 +1,6 @@
 from enum import Enum
 
+
 class GeothonConstants(Enum):
      RAD = 'rad'
      DEG = 'deg'
