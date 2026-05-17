@@ -5,7 +5,7 @@ from collections.abc import Iterable
 from angle import Angle
 from point import Point
 from vector import Vector
-from utilities import IGP_alpha
+from utilities import IGP
 from constants import GeothonConstants
 
 
