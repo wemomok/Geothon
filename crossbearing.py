@@ -16,7 +16,7 @@ class InverseLinearAngularCrossbearing:
 
     @staticmethod
     def calculate_triangle(a=Point, b=Point, s1=float, s2=float, beta=Angle):
-        alphaba, sab = IGP_alpha(b, a)
+        alphaba, sab = IGP(b, a)
         phi = np.arccos((s1 ** 2 + sab ** 2 - s2 ** 2) / (2 * sab * s1))
         alphaap = alphaba - phi + np.pi
         return Point(a[0] + s1 * np.cos(alphaap), a[1] + s1 * np.sin(alphaap))
